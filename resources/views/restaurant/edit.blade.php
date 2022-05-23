@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+ @section('content')
+ <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Sukurti naują kebabinę</div>
+ 
+                <div class="card-body">
+
+                    <form method="POST" action="{{route('restaurant.update', [$restaurant])}}">
+
+                        <div class="form-group">
+                            <label>Naujos picerijos pavadinimas</label>
+                            <input class="form-control" type="text" name="restaurant_name" value="{{$restaurant->title}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Darbuotojų skaičius</label>
+                            <input class="form-control" type="number" name="employee_count" min="0" value="{{$restaurant->employees}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Vartotojų skaičius</label>
+                            <input class="form-control" type="number" name="customer_count" min="0" value="{{$restaurant->customer}}">
+                        </div>
+                        
+                        <label>Pasirinkti meniu</label>
+                        <select name="menu_id">
+                            @foreach ($menus as $menu)
+                                <option value="{{$menu->id}}">{{$menu->title}}</option>
+                            @endforeach
+                        </select>
+                        
+                        @csrf
+                        <button type="submit">Pakeisti</button>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ @endsection
